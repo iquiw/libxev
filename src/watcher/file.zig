@@ -321,6 +321,7 @@ fn FileStream(comptime xev: type) type {
             // windows: std.fs.File is not opened with OVERLAPPED flag.
             if (builtin.os.tag == .windows) return error.SkipZigTest;
             if (builtin.os.tag == .freebsd) return error.SkipZigTest;
+            if (builtin.os.tag == .netbsd) return error.SkipZigTest;
 
             const testing = std.testing;
             const io = testing.io;
@@ -728,6 +729,7 @@ fn FileTests(
             // windows: std.fs.File is not opened with OVERLAPPED flag.
             if (builtin.os.tag == .windows) return error.SkipZigTest;
             if (builtin.os.tag == .freebsd) return error.SkipZigTest;
+            if (builtin.os.tag == .netbsd) return error.SkipZigTest;
 
             const testing = std.testing;
             const io = testing.io;
@@ -804,6 +806,7 @@ fn FileTests(
             // windows: std.fs.File is not opened with OVERLAPPED flag.
             if (builtin.os.tag == .windows) return error.SkipZigTest;
             if (builtin.os.tag == .freebsd) return error.SkipZigTest;
+            if (builtin.os.tag == .netbsd) return error.SkipZigTest;
 
             const testing = std.testing;
             const io = testing.io;
@@ -878,6 +881,7 @@ fn FileTests(
             // windows: std.fs.File is not opened with OVERLAPPED flag.
             if (builtin.os.tag == .windows) return error.SkipZigTest;
             if (builtin.os.tag == .freebsd) return error.SkipZigTest;
+            if (builtin.os.tag == .netbsd) return error.SkipZigTest;
 
             const testing = std.testing;
             const io = testing.io;

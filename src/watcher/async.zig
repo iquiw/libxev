@@ -56,6 +56,10 @@ fn AsyncEventFd(comptime xev: type) type {
                         0,
                         0x100000 | 0x4, // EFD_CLOEXEC | EFD_NONBLOCK
                     ),
+                    .netbsd => eventfd(
+                        0,
+                        0x400000 | 0x4, // EFD_CLOEXEC | EFD_NONBLOCK
+                    ),
 
                     // Use the raw linux syscall.
                     else => blk: {

@@ -18,6 +18,7 @@ pub const Backend = enum {
                 .io_uring,
             .ios, .macos, .visionos => .kqueue,
             .freebsd => .kqueue,
+            .netbsd => .kqueue,
             .wasi => .wasi_poll,
             .windows => .iocp,
             else => {
@@ -36,6 +37,7 @@ pub const Backend = enum {
                 &.{ .io_uring, .epoll },
             .ios, .macos, .visionos => &.{.kqueue},
             .freebsd => &.{.kqueue},
+            .netbsd => &.{.kqueue},
             .wasi => &.{.wasi_poll},
             .windows => &.{.iocp},
             else => {

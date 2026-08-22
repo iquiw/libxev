@@ -533,6 +533,7 @@ fn TCPTests(comptime xev: type, comptime Impl: type) type {
             // We have no way to get a socket in WASI from a WASI context.
             if (builtin.os.tag == .wasi) return error.SkipZigTest;
             if (builtin.os.tag == .freebsd) return error.SkipZigTest;
+            if (builtin.os.tag == .netbsd) return error.SkipZigTest;
 
             const testing = std.testing;
 
@@ -714,6 +715,7 @@ fn TCPTests(comptime xev: type, comptime Impl: type) type {
             // Windows doesn't seem to respect the SNDBUF socket option.
             if (builtin.os.tag == .windows) return error.SkipZigTest;
             if (builtin.os.tag == .freebsd) return error.SkipZigTest;
+            if (builtin.os.tag == .netbsd) return error.SkipZigTest;
 
             const testing = std.testing;
 

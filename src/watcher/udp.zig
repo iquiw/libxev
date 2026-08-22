@@ -926,6 +926,7 @@ fn UDPTests(comptime xev: type, comptime Impl: type) type {
 
         test "UDP: read/write" {
             if (builtin.os.tag == .freebsd) return error.SkipZigTest;
+            if (builtin.os.tag == .netbsd) return error.SkipZigTest;
             const testing = std.testing;
 
             var tpool = ThreadPool.init(.{});
