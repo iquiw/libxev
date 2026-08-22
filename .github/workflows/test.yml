@@ -118,6 +118,29 @@ jobs:
           zig build test --summary all
           zig build -Demit-example -Demit-bench --summary all
 
+  test-x86_64-netbsd:
+    runs-on: namespace-profile-mitchellh-sm-systemd
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    # Required by Namespace
+    - run: sudo systemctl start ssh
+
+    - name: test
+      uses: vmactions/netbsd-vm@v1
+      with:
+        usesh: true
+        prepare: |
+          /usr/sbin/pkg_add -u wget
+
+        run: |
+          wget -O /tmp/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}.tar.xz https://ziglang.org/download/${{ env.ZIG_VERSION }}/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}.tar.xz
+          tar -xf /tmp/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}.tar.xz -C /tmp
+          alias zig=/tmp/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}/zig
+          zig build test --summary all
+          zig build -Demit-example -Demit-bench --summary all
+
   test-aarch64-macos:
     runs-on: macos-latest
     steps:
