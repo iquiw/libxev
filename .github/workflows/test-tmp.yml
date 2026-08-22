@@ -1,0 +1,32 @@
+on:
+  workflow_dispatch:
+
+name: Test
+env:
+  ZIG_VERSION: 0.16.0
+
+jobs:
+  test-x86_64-netbsd:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+
+    # Required by Namespace
+    - run: sudo systemctl start ssh
+
+    - name: test
+      uses: vmactions/netbsd-vm@v1
+      with:
+        usesh: true
+        prepare: |
+          pkgin update
+          pkgin upgrade -y
+          pkgin install -y wget
+
+        run: |
+          wget -O /tmp/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}.tar.xz https://ziglang.org/download/${{ env.ZIG_VERSION }}/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}.tar.xz
+          tar -xf /tmp/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}.tar.xz -C /tmp
+          alias zig=/tmp/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}/zig
+          zig build test --summary all
+          zig build -Demit-example -Demit-bench --summary all
