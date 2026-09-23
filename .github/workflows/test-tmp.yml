@@ -1,7 +1,10 @@
 on:
+  push:
+    branches:
+    - test
   workflow_dispatch:
 
-name: Test
+name: Test-tmp
 env:
   ZIG_VERSION: 0.16.0
 
