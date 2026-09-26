@@ -23,10 +23,7 @@ jobs:
       with:
         usesh: true
         prepare: |
-          /usr/sbin/pkg_add pkgin
-          pkgin update
-          pkgin upgrade -y
-          pkgin install -y wget
+          /usr/sbin/pkg_add -u wget
 
         run: |
           wget -O /tmp/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}.tar.xz https://ziglang.org/download/${{ env.ZIG_VERSION }}/zig-x86_64-netbsd-${{ env.ZIG_VERSION }}.tar.xz
