@@ -23,6 +23,7 @@ jobs:
       with:
         usesh: true
         prepare: |
+          /usr/sbin/pkg_add pkgin
           pkgin update
           pkgin upgrade -y
           pkgin install -y wget
